@@ -16,7 +16,7 @@ Ich vermute, dass das System ein Hypervisor vom Typ 2 verwendet, da die VM in ei
 
 Das host-System hat 16 Logische Prozessoren und 16 GB RAM. Wir verwenden VM VirtualBox.
 
-  RAM: ![grafik](![image](https://github.com/user-attachments/assets/53677f2e-7d5e-4500-b17a-5243386eec46)
+  RAM: ![image](https://github.com/user-attachments/assets/53677f2e-7d5e-4500-b17a-5243386eec46)
 
-  Logische Prozessoren: ![grafik](![image](https://github.com/user-attachments/assets/c8df280a-df8c-48f2-affb-c42581cd8512)
+  Logische Prozessoren: ![image](https://github.com/user-attachments/assets/c8df280a-df8c-48f2-affb-c42581cd8512)
 
