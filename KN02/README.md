@@ -20,5 +20,5 @@ Funktionierender Command zur Verbindung mit der Instanz mit Key 1:
 Nicht funktionierender Command zur Verbindung mit der Instanz mit Key 2:
 ![Screenshot 2024-11-22 150504](https://github.com/user-attachments/assets/9aa0c66a-ea79-40ad-be13-eb3ddd92389e)
 
-Instanz-Detials mit verwendetem Schlüsselpaar:
+Instanz-Details mit verwendetem Schlüsselpaar:
 ![Screenshot 2024-11-22 143421](https://github.com/user-attachments/assets/c31bb5e8-39c8-4b61-a39a-4a6ff801c139)
