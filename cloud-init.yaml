@@ -1,0 +1,15 @@
+#cloud-config
+users:
+  - name: ubuntu #benutzername
+    sudo: ALL=(ALL) NOPASSWD:ALL #sudo regeln fuer den benutzer "ubuntu"
+    groups: users, admin #gruppen, in denen der benutzer "ubuntu" ist
+    home: /home/ubuntu #heim-verzeichnis des benutzer "ubuntu"
+    shell: /bin/bash #verzeichnis von bash
+    ssh_authorized_keys: #fuegt keys zur datei "authorized keys" des benutzers hinzu, optional
+      - ssh-rsa <public key> aws-key
+ssh_pwauth: false #wenn "true", sshd wird so konfiguriert, dass das passwort login akzeptiert wird
+disable_root: false #wenn "true", root login wird ausgeschaltet, wenn "false", eingeschaltet
+package_update: true #wenn "true", wendet updates von packages an
+packages: #installierte packages
+  - curl #curl wird verwendet, um daten von einem server zu empfangen und zu senden
+  - wget #get wird verwendet, um daten von web server herunterzuladen
