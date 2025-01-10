@@ -1,0 +1,62 @@
+#cloud-config
+users:
+  - name: ubuntu
+    sudo: ALL=(ALL) NOPASSWD:ALL
+    groups: users, admin
+    home: /home/ubuntu
+    shell: /bin/bash
+    ssh_authorized_keys:
+      - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDJ5VurcwNo6PQ6K6Juk5A3V445Du5KGzd1lFCu1AVc17IBXhzr8emv6+ToCnqoeklObyzggi52EJR5/f1nNtGK5RWXY1F7Pl5qQou1NYLat9r3CgMoUW6SGfkWFiOGinpK0xiyVbsAInRIvCN5sWHvv6JjIm8N07wSk2gbWq3+2sAfe5221cAUhFRLleaSChteFnlC8Lq/SMF/M/3l+osOd7ixysgms5CB8DyjJuaB8Hl41Cyo6zHLHl3/ztkQje3FLlQ+MJ4xuwd9qA7hu47dPhpSrTp+dSnp2sE6CPfO8f1Vvo9In82Sxw5AITS9dFYP2zsGFps2xe1MZvark9In aws-key
+      - ssh-rsa MIIBCgKCAQEA8lshkw886qvWI7jKrK3F0TIWVawmw/nJy9mC6Uy205Yto13F+piEllc6z0FhJBeTj1glbVqVKchII8Hu5uxOc76SNGxoj63c6z5juUjIRSNIESSuVXSRFZefVwqJW+Lnqod3ML6W19pDFfH6tOFmPkqPJhhZWfhAfknb1pIHc3XtCjqF/KWUI3v6w+hqRxfSY7pdO+Q9ZJpUuGlJVJhpDN3OmeY/6YS48k0Wsijg/3WckxFUhmWkvXLHd0Lv2/fKqB/Vabxu/q4vkTTIdyGJCKTkSY4ZQscb2+rk0fPVnLzU/eJDQQNBlBAkJILhJS48fVkkdEcIpnzr+G/hMI/7FwIDAQAB aws-key
+ssh_pwauth: false
+disable_root: false
+package_update: true
+packages:
+  - curl
+  - wget
+  - apache2
+  - php
+  - libapache2-mod-php
+  - adminer
+  - php-mysqli
+ 
+write_files:
+- path: /var/www/html/db.php
+  content: |
+    <?php
+        $servername = "127.0.0.1";
+        $username = "admin";
+        $password = "pw";
+        $dbname = "mysql";
+ 
+        $conn = new mysqli($servername, $username, $password, $dbname);
+        if ($conn->connect_error) {
+            die("Connection failed: " . $conn->connect_error);
+        }
+ 
+        $sql = "select Host, User from mysql.user;";
+        $result = $conn->query($sql);
+        while ($row = $result->fetch_assoc()) {
+            echo("<li>" . $row["Host"] . " / " . $row["User"] . "</li>");
+        }
+    ?>
+- path: /var/www/html/info.php
+  content: |
+    <?php
+      phpinfo();
+    ?>
+ 
+- path: /var/www/html/index.html
+  content: |
+    <html>
+      <head><title>Willkommen</title></head>
+      <body><h1>Willkommen auf dem Webserver!</h1></body>
+    </html>
+ 
+runcmd:
+- sudo cp ./m346scripts/KN03/*.php /var/www/html/
+- sudo a2enconf adminer
+- sudo systemctl restart apache2
+- sudo ufw allow 80/tcp
+- sudo ufw allow 22/tcp
+- sudo ufw enable
